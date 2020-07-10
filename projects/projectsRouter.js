@@ -1,6 +1,5 @@
 const express = require("express");
 const db = require("../data/helpers/projectModel");
-const { count } = require("../data/dbConfig");
 
 const router = express.Router();
 
@@ -24,6 +23,16 @@ router.get("/:id", (req, res) => {
         })
 });
 
+router.get("/:id/actions", (req, res) => {
+    db.getProjectActions(req.params.id)
+        .then(actions => {
+            res.status(200).json({ actions });
+        })
+        .catch(error => {
+            res.status(500).json({ message: "Error fetching actions." });
+        })
+})
+
 router.post("/", (req,res) => {
     if ( req.body.name && req.body.description ) {
         db.insert(req.body)
@@ -31,7 +40,7 @@ router.post("/", (req,res) => {
                 res.status(201).json({ newPost })
             })
             .catch(error => {
-                res.status(500).json({ message: "Error posting new post." });
+                res.status(500).json({ message: "Error posting new project." });
             })
     } else {
         res.status(400).json({ message: "Make sure the name and description fields are entered!" });
@@ -41,11 +50,11 @@ router.post("/", (req,res) => {
 router.put("/:id", (req, res) => {
     if ( req.body.name && req.body.description ) {
         db.update(req.params.id, req.body)
-            .then(updatedPost => {
-                res.status(201).json({ updatedPost })
+            .then(updatedProject => {
+                res.status(201).json({ updatedProject })
             })
             .catch(error => {
-                res.status(500).json({ message: "Error updating post." });
+                res.status(500).json({ message: "Error updating project." });
             })
     } else {
         res.status(400).json({ message: "Make sure the name and description fields are entered!" });
@@ -60,6 +69,6 @@ router.delete("/:id", (req, res) => {
         .catch(error => {
             res.status(500).json({ message: "Error deleting project." });
         })
-})
+});
 
 module.exports = router;
