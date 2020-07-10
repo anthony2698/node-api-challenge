@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+I learned that express is a lightweight framework for node.js, express also allows for routing and middleware support.
+
 - [ ] Describe Middleware?
+
+Middleware is used to add features to our express appplications. 
 
 - [ ] Describe a Resource?
 
+A resource is a slice of data that is accessed thorough a unique URL.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+The API can return a success code status of 200.
+
 - [ ] How can we partition our application into sub-applications?
+
+We can partition our application into a sub-application by adding routers that handle routing for access to a specific resource.
 
 ## Minimum Viable Product
 
